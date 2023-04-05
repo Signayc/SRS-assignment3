@@ -51,8 +51,8 @@ N <- sum(data)+y0000
 N
 
 # Attain the confidence interval for N
-lowerbond <- summary(step.model)$coefficients[1,1]-1.96*summary(step.model)$coefficients[1,2]
-upperbond <- summary(step.model)$coefficients[1,1]+1.96*summary(step.model)$coefficients[1,2]
-lb_exp <- exp(lowerbond)+sum(data)
-ub_exp <- exp(upperbond)+sum(data)
+conf <- confint(profile(step.model,level = 0.95))[1,c(1,2)]
+conf
+lb_exp <- exp(conf[1])+sum(data)
+ub_exp <- exp(conf[2])+sum(data)
 cat("The 95% confidence interval for N is [",lb_exp,",",ub_exp,"].",sep = "")
